@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% block content %}
+{% load static %}
+    <!-- Order -->
+    <section id="buy" class="body">
+        <div class="row">
+            <div class="col-12">
+                <center>
+                    <h1>Check Out</h1>
+                    <hr width="50%">
+                </center>
+            </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="cold-md-2">
+                {% for message in messages %}
+                    {% if message %}
+                        <div class="alert alert-success">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+                <form action="#" method="post">
+                    {% csrf_token %}
+                    {{form.as_p}}
+            </div>
+        </div>
+                    <div class="row">
+                        <div class="col-6" align="center"><button id="form" type="submit">Order</button></div>
+                        <div class="col-6" align="center"><button id="form" type="button"><a href="/vOrder">Back</a></button></div>
+                    </div>
+                </form>
+    </section>
+{% endblock %}

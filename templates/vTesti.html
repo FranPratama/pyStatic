@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% block content %}
+{% load static %}
+    <!-- Order -->
+    <section id="buy" class="body">
+        <div class="row">
+            <div class="col-12">
+                <center>
+                    <h1>Testimonial</h1>
+                    <hr width="50%">
+                </center>
+            </div>
+        </div>
+        <br><br>
+        <a href="/testi" class="btn btn-primary">Give testimony</a>
+        {% for messages in messages %}
+            {% if message %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+        <table class="table table-hover">
+            <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Testimony</th>
+                <th>Action</th>
+            </tr>
+            {% for Testimonial in view %}
+            <tr>
+                <td><a href="{% url 'upTesti' Testimonial.id %}" style="font-weight: bold;">{{ Testimonial.name }}</a></td>
+                <td>{{ Testimonial.gender }}</td>
+                <td>{{ Testimonial.address }}</td>
+                <td>{{ Testimonial.phone_number }}</td>
+                <td>{{ Testimonial.email }}</td>
+                <td>{{ Testimonial.testimonials }}</td>
+                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-{{ Testimonial.id }}">Delete</button></td>
+                    <div class="modal fade" id="delete-{{ Testimonial.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-tile fs-5" id="exampleModalLabel">Are you sure want to delete ?</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Testimony from {{ Testimonial.name }}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <a href="{% url 'delTesti' Testimonial.id %}" class="btn btn-danger">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+{% endblock %}
